@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constancias de Estudio - Institución Educativa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 10L12 5 2 10l10 5 10-5z"/>
+                        <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1>Constancias de Estudio</h1>
+                    <p>Institución Educativa - Sistema de Generación de Documentos</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="card">
+                    <h2>🔍 Buscar Estudiante</h2>
+                    <p class="subtitle">Ingrese el número de documento del estudiante para generar su constancia</p>
+                    
+                    <div class="search-form">
+                        <div class="input-group">
+                            <label for="tipoDocumento">Tipo de Documento</label>
+                            <select id="tipoDocumento">
+                                <option value="DNI">DNI</option>
+                                <option value="CE">Carné de Extranjería</option>
+                                <option value="PAS">Pasaporte</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="numeroDocumento">Número de Documento</label>
+                            <input type="text" id="numeroDocumento" placeholder="Ej: 12345678" maxlength="20">
+                        </div>
+                        <button id="btnBuscar" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                            Buscar
+                        </button>
+                    </div>
+
+                    <!-- Loading -->
+                    <div id="loading" class="loading hidden">
+                        <div class="spinner"></div>
+                        <p>Buscando estudiante...</p>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="errorMessage" class="alert alert-error hidden"></div>
+                </div>
+            </section>
+
+            <!-- Student Info Section -->
+            <section id="studentSection" class="student-section hidden">
+                <div class="card">
+                    <h2>📋 Información del Estudiante</h2>
+                    
+                    <div class="student-info">
+                        <div class="info-row">
+                            <span class="label">Nombres:</span>
+                            <span id="studentName" class="value"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Apellidos:</span>
+                            <span id="studentLastname" class="value"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Documento:</span>
+                            <span id="studentDoc" class="value"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Grado:</span>
+                            <span id="studentGrade" class="value"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Sección:</span>
+                            <span id="studentSeccion" class="value"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Año Escolar:</span>
+                            <span id="studentYear" class="value"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Estado:</span>
+                            <span id="studentStatus" class="value status-badge"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivo">Motivo de la constancia (opcional)</label>
+                        <input type="text" id="motivo" placeholder="Ej: Trámite de beca, matrícula en otra IE, etc.">
+                    </div>
+
+                    <button id="btnGenerar" class="btn btn-success btn-large">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="12" y1="18" x2="12" y2="12"/>
+                            <line x1="9" y1="15" x2="15" y2="15"/>
+                        </svg>
+                        Generar Constancia PDF
+                    </button>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section id="resultSection" class="result-section hidden">
+                <div class="card card-success">
+                    <div class="success-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h2>¡Constancia Generada Exitosamente!</h2>
+                    <p id="resultMessage"></p>
+                    
+                    <div class="result-actions">
+                        <a id="btnDescargar" href="#" target="_blank" class="btn btn-primary btn-large">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Descargar PDF
+                        </a>
+                        <button id="btnNueva" class="btn btn-secondary">
+                            Generar otra constancia
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👨‍🎓</div>
+                        <div class="stat-info">
+                            <span id="statEstudiantes" class="stat-value">0</span>
+                            <span class="stat-label">Estudiantes</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-info">
+                            <span id="statMatriculas" class="stat-value">0</span>
+                            <span class="stat-label">Matrículas Activas</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-info">
+                            <span id="statConstancias" class="stat-value">0</span>
+                            <span class="stat-label">Constancias Emitidas</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Institución Educativa - Sistema de Constancias de Estudio</p>
+            <p class="footer-note">Documentos generados electrónicamente con validez oficial</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
