@@ -1,0 +1,2 @@
+cd C:\Users\Estudiante\Documents\Proyecto predeterminado\ie-constancias
+npm start
