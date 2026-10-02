@@ -124,3 +124,4 @@ Este proyecto es de uso educativo y puede ser modificado según las necesidades 
 ## 🤝 Soporte
 
 Para problemas o sugerencias, revisar la documentación o crear un issue en el repositorio.
+ 
